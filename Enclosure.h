@@ -1,15 +1,31 @@
-#ifndef ENCLOSURE_H
-#define ENCLOSURE_H
+#include "Enclosure.h"
 
-#include "Animal.h"
+Enclosure::Enclosure(int c)
+{
+    capacity = c;
+    currentCount = 0;
+    animals = new Animal *[capacity];
+}
 
-//define enclosure class here 
+void Enclosure::addAnimal(Animal *a)
+{
+    if (currentCount < capacity)
+        animals[currentCount++] = a;
+}
 
+void Enclosure::displayAnimals()
+{
+    cout << "Enclosure 1 Animals:\n";
+    for (int i = 0; i < currentCount; i++)
+    {
+        animals[i]->display();
+        cout << endl;
+    }
+}
 
-
-
-
-
-
-
-#endif
+Enclosure::~Enclosure()
+{
+    for (int i = 0; i < currentCount; i++)
+        delete animals[i];
+    delete[] animals;
+}
